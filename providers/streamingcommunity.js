@@ -614,33 +614,16 @@ function getStreams(id, type, season, episode, providerContext = null) {
         };
         return [formatStream(result2, "StreamingCommunity")].filter((s) => s !== null);
       }
-      // HEADERS OTTIMIZZATI PER EVITARE IL BUFFERING
-      const stableStreamHeaders = {
-        'User-Agent': USER_AGENT,
-        'Referer': embedUrl,
-        'Origin': getStreamingCommunityBaseUrl(),
-        'Accept': '*/*',
-        'Accept-Language': 'it-IT,it;q=0.9,en-US;q=0.8,en;q=0.7',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin'
-      };
-
       const result = {
-        name: `StreamingCommunity (Fixed)`,
+        name: `StreamingCommunity`,
         title: finalDisplayName,
         url: streamUrl,
         easyProxySourceUrl: embedUrl.replace("vixsrc.to", "unitv.mom"),
         quality: normalizedQuality,
-        // MODIFICA: forzato a "hls" per una migliore gestione del buffering
-        type: "hls", 
-        headers: stableStreamHeaders,
+        type: "direct",
+        headers: streamHeaders,
         behaviorHints: {
-          notWebReady: false,
-          // Inietta gli headers per ogni singolo segmento video richiesto
-          proxyHeaders: {
-              request: stableStreamHeaders
-          }
+          notWebReady: false
         },
         language: resultLanguage
       };
