@@ -615,7 +615,7 @@ function getStreams(id, type, season, episode, providerContext = null) {
         return [formatStream(result2, "StreamingCommunity")].filter((s) => s !== null);
       }
       const result = {
-        name: `StreamingCommunity`,
+        name: `StreamingCommunity - fixed`,
         title: finalDisplayName,
         url: streamUrl,
         easyProxySourceUrl: embedUrl.replace("vixsrc.to", "unitv.mom"),
